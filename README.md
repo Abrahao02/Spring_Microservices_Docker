@@ -98,8 +98,8 @@ CMD ["mysqld", "--bind-address=0.0.0.0"]
 Imagem criada:
 ```bash
 docker build -t mysql-custom .
-docker tag mysql-custom eduardo/mysql-custom:1.0
-docker push eduardo/mysql-custom:1.0
+docker tag mysql-custom abrahaoeduardo/mysql-custom:1.0
+docker push abrahaoeduardo/mysql-custom:1.0
 ```
 
 ## 📦 YAMLs de implantação no Kubernetes
@@ -181,7 +181,6 @@ Aplicando no Kubernetes:
 kubectl apply -f k8s/
 kubectl get pods
 ```
-
 ---
 
 # 📘 Parte 4 — Microsserviços Spring Boot
@@ -195,7 +194,6 @@ Endpoints criados:
 - Consome Service A via Feign
 - Endpoints:
   - `GET /pedidos`
-  - `GET /saudacao`
 
 Exemplo Feign:
 ```java
