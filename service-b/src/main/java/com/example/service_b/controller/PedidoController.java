@@ -24,4 +24,5 @@ public class PedidoController {
         List<Produto> produtos = produtoClient.listarProdutos();
         return List.of(new Pedido("Pedido 1", produtos));
     }
+
 }
