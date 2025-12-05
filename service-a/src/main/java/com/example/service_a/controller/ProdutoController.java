@@ -1,6 +1,8 @@
 package com.example.service_a.controller;
 
 import com.example.service_a.classe.Produto;
+import com.example.service_a.repository.ProdutoRepository;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,11 +13,14 @@ import java.util.List;
 @RequestMapping("/produtos")
 public class ProdutoController {
 
+    private final ProdutoRepository repository;
+
+    public ProdutoController(ProdutoRepository repository) {
+        this.repository = repository;
+    }
+
     @GetMapping
     public List<Produto> listarProdutos() {
-        return List.of(
-                new Produto(1L, "Notebook", 3500.0),
-                new Produto(2L, "Mouse", 120.0)
-        );
+        return (List<Produto>) repository.findAll();
     }
 }
