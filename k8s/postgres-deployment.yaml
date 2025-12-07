@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          env:
+            - name: POSTGRES_DB
+              value: produtosdb
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+          ports:
+            - containerPort: 5432
+
+          volumeMounts:
+            # Diretório de inicialização oficial do Postgres
+            - name: db-init
+              mountPath: /docker-entrypoint-initdb.d
+
+            # Volume para armazenar os dados
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+
+      volumes:
+        # ConfigMap com script init.sql
+        - name: db-init
+          configMap:
+            name: db-init-sql
+            items:
+              - key: init.sql
+                path: init.sql
+
+        - name: postgres-data
+          emptyDir: {}

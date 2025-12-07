@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-init-sql
+data:
+  init.sql: |
+    -- Cria a tabela produto se não existir
+    CREATE TABLE IF NOT EXISTS produto (
+      id SERIAL PRIMARY KEY,
+      nome VARCHAR(255),
+      preco NUMERIC
+    );
+
+    -- Popula a tabela
+    INSERT INTO produto(nome, preco) VALUES('Notebook', 3500.0)
+    ON CONFLICT DO NOTHING;
+
+    INSERT INTO produto(nome, preco) VALUES('Mouse', 120.0)
+    ON CONFLICT DO NOTHING;
