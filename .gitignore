@@ -1,0 +1,10 @@
+# Pastas de build
+/target/
+/build/
+
+# Imagens Docker exportadas
+*.tar
+
+# IDEs
+.vscode/
+.idea/
